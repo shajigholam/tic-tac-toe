@@ -18,7 +18,7 @@ int winPositions[8][3] = {
 void createBoard()
 {
     for (int i = 0; i < 9; i++) {
-        cout << i + 1 << " | ";
+        cout << board[i] << " | ";
         if ((i + 1) % 3 == 0) {
             cout << "\n";
         }
@@ -38,7 +38,7 @@ bool isWin(char currPly)
 bool isDraw()
 {
     for (int i = 0; i < 9; i++) {
-        if (board[i+1] != 'X' && board[i+1] != 'O') {
+        if (board[i] != 'X' && board[i] != 'O') {
             return false;
         }
     }
@@ -50,7 +50,7 @@ void playGame()
     char currentPlayer = 'X';
     int move;
     do {
-        cout << "Enter a number(1 - 9): ";
+        cout << currentPlayer << " turn... Enter a number(1 - 9): ";
         cin >> move;
         
         if (move < 1 || move > 9 || board[move - 1] == 'X' || board[move-1] == 'O') {
@@ -58,12 +58,19 @@ void playGame()
             continue;
         }
         board[move - 1] = currentPlayer;
+        
+        createBoard();
+        
         if (isWin(currentPlayer)) {
             cout << "you won!";
             break;
         }
         currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
     } while (!isDraw());
+    
+    if (!isWin(currentPlayer)) {
+        cout << "It's a draw!";
+    }
     
 }
 int main(int argc, const char * argv[]) {
