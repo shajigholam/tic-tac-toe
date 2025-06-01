@@ -28,7 +28,7 @@ void createBoard()
 bool isWin(char currPly)
 {
     for (auto& winPosition : winPositions) {
-        if ((board[winPosition[0] == currPly]) && (board[winPosition[1] == currPly]) && (board[winPosition[2] == currPly])) {
+        if ((board[winPosition[0]] == currPly) && (board[winPosition[1]] == currPly) && (board[winPosition[2]] == currPly)) {
             return true;
         }
     }
